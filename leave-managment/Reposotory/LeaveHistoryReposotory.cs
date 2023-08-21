@@ -3,6 +3,7 @@ using leave_managment.Data;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using leave_managment.Models;
 
 namespace leave_managment.Reposotory
 {
@@ -36,6 +37,12 @@ namespace leave_managment.Reposotory
         {
             var leaveHystory = _db.LeaveHistories.Find(id);
             return leaveHystory;
+        }
+
+        public bool IsExists(int id)
+        {
+            var exists = _db.LeaveHistories.Any(e => e.Id == id);
+            return exists;
         }
 
         public bool Save()

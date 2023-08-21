@@ -37,7 +37,7 @@ namespace leave_managment
             //Add references for Repository and Contracts to Startup file
             services.AddScoped<ILeaveAllocationRepository , LeaveAllocationRepository>();
             services.AddScoped<ILeaveHistoryReposotory, LeaveHistoryReposotory>();
-            services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
+            services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
             services.AddAutoMapper(typeof(Maps));
              
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
