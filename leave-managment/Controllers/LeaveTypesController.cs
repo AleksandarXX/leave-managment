@@ -2,6 +2,7 @@
 using leave_managment.Contracts;
 using leave_managment.Data;
 using leave_managment.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +11,7 @@ using System.Linq;
 
 namespace leave_managment.Controllers
 {
+    [Authorize(Roles ="Administrator")]
     public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeRepository _repo;
@@ -20,7 +22,7 @@ namespace leave_managment.Controllers
             _repo = repo;
             _mapper = mapper;
         }
-        // GET: LeaveTypesController
+        // GET: LeaveTypes
         public ActionResult Index()
         {
             var leaveTypes = _repo.FindAll().ToList();
@@ -28,7 +30,7 @@ namespace leave_managment.Controllers
             return View(model);
         }
 
-        // GET: LeaveTypesController/Details/5
+        // GET: LeaveTypes/Details/5
         public ActionResult Details(int id)
         {
             if (!_repo.IsExists(id))
@@ -40,13 +42,13 @@ namespace leave_managment.Controllers
             return View(model);
         }
 
-        // GET: LeaveTypesController/Create
+        // GET: LeaveTypes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: LeaveTypesController/Create
+        // POST: LeaveTypes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(LeaveTypeVM model)
@@ -73,7 +75,7 @@ namespace leave_managment.Controllers
             }
         }
 
-        // GET: LeaveTypesController/Edit/5
+        // GET: LeaveTypes/Edit/5
         public ActionResult Edit(int id)
         {
             if (!_repo.IsExists(id))
@@ -85,7 +87,7 @@ namespace leave_managment.Controllers
             return View(model);
         }
 
-        // POST: LeaveTypesController/Edit/5
+        // POST: LeaveTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(LeaveTypeVM model)
@@ -113,7 +115,7 @@ namespace leave_managment.Controllers
             }
         }
 
-        // GET: LeaveTypesController/Delete/5
+        // GET: LeaveTypes/Delete/5
         public ActionResult Delete(int id)
         {
             var leaveType = _repo.FindById(id);
@@ -129,7 +131,7 @@ namespace leave_managment.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // POST: LeaveTypesController/Delete/5
+        // POST: LeaveTypes/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, LeaveTypeVM model)
